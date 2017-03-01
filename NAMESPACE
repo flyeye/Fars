@@ -1,0 +1,6 @@
+import(tidyverse)
+import(mapproj)
+import(mapdata)
+import(maps)
+
+exportPattern("^[[:alpha:]]+")
