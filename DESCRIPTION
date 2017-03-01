@@ -4,11 +4,11 @@ Title: Fatality Analysis Reporting System accident`s data processing
 Version: 0.1.0
 Author: Alexey Popov
 Maintainer: Alexey Popov <9141866@gmail.com>
-Description: Fars package contains routings to process Fatality Analysis Reporting System accident`s files
+Description: Fars package contains routings designed to process Fatality Analysis Reporting System accident`s data files.
 License: GPL
 Encoding: UTF-8
 Depends:tidyverse, maps, mapdata, mapproj
-Imports: 
+Imports: dplyr, readr, tidyr
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: knitr,

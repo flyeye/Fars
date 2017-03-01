@@ -3,7 +3,6 @@
 #'
 #' open file with accidents statistics by the given file name and read it into dplyr::tbl_df variable.
 #' @export
-#' @import dplyr
 #' @param filename - character string with file name
 #'
 #' @return data frame as dplyr::tbl_df object. If file does not exist print error message.
@@ -57,15 +56,14 @@ make_filename <- function(year) {
 #' fars_read_years(c(2013, 2014, 2015))
 #' }
 #'
-#' @import dplyr
 #' @export
 fars_read_years <- function(years) {
         lapply(years, function(year) {
                 file <- make_filename(year)
                 tryCatch({
                         dat <- fars_read(file)
-                        dplyr::mutate(dat, year = year) %>%
-                                dplyr::select(MONTH, year)
+                        mutate(dat, year = year) %>%
+                                select_("MONTH", "year")
                 }, error = function(e) {
                         warning("invalid year: ", year)
                         return(NULL)
@@ -90,10 +88,10 @@ fars_read_years <- function(years) {
 #' @export
 fars_summarize_years <- function(years) {
         dat_list <- fars_read_years(years)
-        dplyr::bind_rows(dat_list) %>%
-                dplyr::group_by(year, MONTH) %>%
-                dplyr::summarize(n = n()) %>%
-                tidyr::spread(year, n)
+        bind_rows(dat_list) %>%
+                group_by_("year", "MONTH") %>%
+                summarize(n = n()) %>%
+                spread("year", n)
 }
 
 #' fars_map_state draw a map of state with accidents
@@ -123,7 +121,8 @@ fars_map_state <- function(state.num, year) {
 
         if(!(state.num %in% unique(data$STATE)))
                 stop("invalid STATE number: ", state.num)
-        data.sub <- dplyr::filter(data, STATE == state.num)
+        #data.sub <- filter(data, "STATE == state.num")
+        data.sub <- filter_(data, .dots= paste0("STATE", "== ", state.num))
         if(nrow(data.sub) == 0L) {
                 message("no accidents to plot")
                 return(invisible(NULL))
@@ -131,8 +130,8 @@ fars_map_state <- function(state.num, year) {
         is.na(data.sub$LONGITUD) <- data.sub$LONGITUD > 900
         is.na(data.sub$LATITUDE) <- data.sub$LATITUDE > 90
         with(data.sub, {
-                maps::map("state", ylim = range(LATITUDE, na.rm = TRUE),
+                map("state", ylim = range(LATITUDE, na.rm = TRUE),
                           xlim = range(LONGITUD, na.rm = TRUE))
-                graphics::points(LONGITUD, LATITUDE, pch = 46)
+                points(LONGITUD, LATITUDE, pch = 46)
         })
 }

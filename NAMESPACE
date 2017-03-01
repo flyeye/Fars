@@ -1,4 +1,7 @@
 import(tidyverse)
+import(dplyr)
+import(readr)
+import(tidyr)
 import(mapproj)
 import(mapdata)
 import(maps)
