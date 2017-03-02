@@ -2,7 +2,7 @@
 % Please edit documentation in R/fars_functions.R
 \name{make_filename}
 \alias{make_filename}
-\title{make_filename() function returns make a filename by the given year}
+\title{make_filename() function makes a filename for a raw accident`s data by the given year}
 \usage{
 make_filename(year)
 }
@@ -16,8 +16,6 @@ filename - file name as a character string
 Make a file name as a character string by the given year
 }
 \examples{
-\dontrun{
-make_filename(2016)
-}
+make_filename(2015)
 
 }

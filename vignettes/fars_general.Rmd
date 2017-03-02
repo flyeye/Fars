@@ -10,44 +10,106 @@ vignette: >
 ---
 
 
-## Vignette Info
+## Fars data and routings 
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+This package contains routings designed for processing and visualizing of the data files provided by [US National Highway Traffic Safety Administration's](https://www.nhtsa.gov/) Fatality Analysis Reporting System, which is a US nationwide census providing the American public yearly data regarding fatal injuries suffered in motor vehicle traffic crashes. The raw data files for years 2013, 2014 and 2015 are included in the package and can be accessed by the following code:
 
-## Styles
+```{r}
+ year <- as.integer(2014)
+ system.file("extdata", sprintf("accident_%d.csv.bz2", year), package = "Fars")
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+Fars package consist of a few function, providing access to this data, some simple processing and visualising. This functions are descibed below. 
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+## Functions in a Fars package
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+### ***fars_read()***
 
-## More Examples
+Read accidents statistics by the given file name
+Open file with accidents statistics by the given file name and read it into dplyr::tbl_df variable.
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+**Parameters**
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+*filename* - character string with file name
+
+**output**
+
+dplyr::tbl_df data frame with accident`s data
+
+**examples**
+```{r eval=FALSE}
+  data <- fars_read("accident_2016.csv.bz2")
 ```
 
-Also a quote using `>`:
+### ***make_filename()***
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+Function returns full filename of the accident data stored as a raw files in a package as character by the given year
+
+**Parameters**
+
+*year* - year of accidents
+
+**output**
+
+filename - full file name as a character string
+
+**examples**
+```{r}
+name <- Fars::make_filename(2014)
+```
+
+### ***fars_read_years()***
+
+Read accident`s data by given years and return data frame with short info for each accident.
+
+**Parameters**
+
+*years* - vector of years
+
+**output**
+
+Data frame of class dplyr::tbl_df with two columns (month ans year) per each accident. If data for any of given years do not exist function stops working and return an error message.
+
+**examples**
+```{r eval=FALSE}
+ fars_read_years(c(2013, 2014, 2015))
+```
+
+
+### ***fars_summarize_years()***
+
+Function takes given vector of years and summarize statistical data about accidents.
+
+**Parameters**
+
+*years* - vector of years
+
+**output**
+
+Data frame with summary about accidents in the given years: quantity of accidents per month for each year. If data for any of given years do not exist function stops working and return an error message.
+
+**examples**
+```{r eval=FALSE}
+  fars_summarize_years(c(2013, 2014, 2015))
+```
+
+
+### ***fars_map_state()***
+
+Function fars_map_state() draw a map of state with accidents on it by the given state and year. Accidents are represented as points.
+
+**Parameters**
+
+*year* - interested year of accidents
+
+*state.num*  -  USA state code
+
+**output**
+
+Graphical map.
+
+**examples**
+```{r eval=FALSE}
+fars_map_state(state.num = 1, year = 2014)
+```

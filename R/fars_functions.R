@@ -2,7 +2,6 @@
 #' fars_read() - read accidents statistics by the given file name
 #'
 #' open file with accidents statistics by the given file name and read it into dplyr::tbl_df variable.
-#' @export
 #' @param filename - character string with file name
 #'
 #' @return data frame as dplyr::tbl_df object. If file does not exist print error message.
@@ -13,6 +12,7 @@
 #' }
 #'
 #'
+#' @export
 fars_read <- function(filename) {
         if(!file.exists(filename))
                 stop("file '", filename, "' does not exist")
@@ -22,7 +22,7 @@ fars_read <- function(filename) {
         dplyr::tbl_df(data)
 }
 
-#' make_filename() function returns make a filename by the given year
+#' make_filename() function makes a filename for a raw accident`s data by the given year
 #'
 #' Make a file name as a character string by the given year
 #'
@@ -31,9 +31,7 @@ fars_read <- function(filename) {
 #' @return filename - file name as a character string
 #'
 #' @examples
-#' \dontrun{
-#' make_filename(2016)
-#' }
+#' make_filename(2015)
 #'
 #' @export
 make_filename <- function(year) {
@@ -97,7 +95,7 @@ fars_summarize_years <- function(years) {
 #' fars_map_state draw a map of state with accidents
 #'
 #' Function fars_map_state() draw a map of state with accidents on it by the given state and year. Accidents are represented as points.
-#' @export
+#'
 #' @param year - interested year of accidents
 #' @param state.num  -  USA state code
 #'
@@ -112,7 +110,7 @@ fars_summarize_years <- function(years) {
 #'
 #' @note function return error message in case of no data for the state or year specified.
 #'
-#'
+#' @export
 
 fars_map_state <- function(state.num, year) {
         filename <- make_filename(year)
