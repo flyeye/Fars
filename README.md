@@ -4,6 +4,8 @@ This package contains routings designed for processing and visualizing of the da
 
 ![](https://travis-ci.org/flyeye/Fars.svg?branch=master)
 
+Last build [details](https://travis-ci.org/flyeye/Fars) on Travis CI service.
+
 ## Installation
 
 You can install Fars from github with:
