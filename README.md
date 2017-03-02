@@ -2,6 +2,8 @@
 
 This package contains routings designed for processing and visualizing of the data files provided by [US National Highway Traffic Safety Administration's](https://www.nhtsa.gov/) Fatality Analysis Reporting System, which is a US nationwide census providing the American public yearly data regarding fatal injuries suffered in motor vehicle traffic crashes. The raw data files for years 2013, 2014 and 2015 are included.
 
+![](https://travis-ci.org/flyeye/Fars.svg?branch=master)
+
 ## Installation
 
 You can install Fars from github with:
