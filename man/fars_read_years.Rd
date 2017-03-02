@@ -17,8 +17,6 @@ function stops working and return an error message.
 Read accidents data by given years and return data frame with short info for each accident.
 }
 \examples{
-\dontrun{
 fars_read_years(c(2013, 2014, 2015))
-}
 
 }

@@ -7,10 +7,11 @@
 #' @return data frame as dplyr::tbl_df object. If file does not exist print error message.
 #'
 #' @examples
-#' \dontrun{
-#' data <- fars_read("accident_2016.csv.bz2")
-#' }
+#' name <- system.file("extdata", sprintf("accident_%d.csv.bz2", 2014), package = "Fars")
+#' data <- fars_read(name)
 #'
+#'
+#' @import tidyr readr tidyverse dplyr mapproj mapdata maps
 #'
 #' @export
 fars_read <- function(filename) {
@@ -50,9 +51,7 @@ make_filename <- function(year) {
 #' function stops working and return an error message.
 #'
 #' @examples
-#' \dontrun{
 #' fars_read_years(c(2013, 2014, 2015))
-#' }
 #'
 #' @export
 fars_read_years <- function(years) {
@@ -79,9 +78,7 @@ fars_read_years <- function(years) {
 #' function stops working and return an error message.
 #'
 #' @examples
-#' \dontrun{
 #' fars_summarize_years(c(2013, 2014, 2015))
-#' }
 #'
 #' @export
 fars_summarize_years <- function(years) {
@@ -104,9 +101,8 @@ fars_summarize_years <- function(years) {
 #' graphical map
 #'
 #' @examples
-#' \dontrun{
 #' fars_map_state(state.num = 1, year = 2014)
-#' }
+#'
 #'
 #' @note function return error message in case of no data for the state or year specified.
 #'

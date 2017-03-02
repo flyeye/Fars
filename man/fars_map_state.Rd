@@ -21,8 +21,7 @@ Function fars_map_state() draw a map of state with accidents on it by the given 
 function return error message in case of no data for the state or year specified.
 }
 \examples{
-\dontrun{
 fars_map_state(state.num = 1, year = 2014)
-}
+
 
 }

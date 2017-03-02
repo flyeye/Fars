@@ -16,9 +16,8 @@ data frame as dplyr::tbl_df object. If file does not exist print error message.
 open file with accidents statistics by the given file name and read it into dplyr::tbl_df variable.
 }
 \examples{
-\dontrun{
-data <- fars_read("accident_2016.csv.bz2")
-}
+name <- system.file("extdata", sprintf("accident_\%d.csv.bz2", 2014), package = "Fars")
+data <- fars_read(name)
 
 
 }

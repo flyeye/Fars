@@ -3,18 +3,25 @@
  system.file("extdata", sprintf("accident_%d.csv.bz2", year), package = "Fars")
 
 
-## ----eval=FALSE----------------------------------------------------------
-#    data <- fars_read("accident_2016.csv.bz2")
+## ----results='asis', echo=FALSE, include=FALSE---------------------------
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
+library(Fars)
 
 ## ------------------------------------------------------------------------
-name <- Fars::make_filename(2014)
+  name <- system.file("extdata", sprintf("accident_%d.csv.bz2", 2014), package = "Fars")
+  data <- fars_read(name)
+  data[1:3, 1:10]
 
-## ----eval=FALSE----------------------------------------------------------
-#   fars_read_years(c(2013, 2014, 2015))
+## ------------------------------------------------------------------------
+make_filename(2014)
 
-## ----eval=FALSE----------------------------------------------------------
-#    fars_summarize_years(c(2013, 2014, 2015))
+## ------------------------------------------------------------------------
+ data <- fars_read_years(c(2013, 2014, 2015))
+ data[[1]]
 
-## ----eval=FALSE----------------------------------------------------------
-#  fars_map_state(state.num = 1, year = 2014)
+## ------------------------------------------------------------------------
+  fars_summarize_years(c(2013, 2014, 2015))
+
+## ------------------------------------------------------------------------
+fars_map_state(state.num = 1, year = 2014)
 

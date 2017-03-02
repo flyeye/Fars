@@ -24,6 +24,11 @@ Fars package consist of a few function, providing access to this data, some simp
 
 ## Functions in a Fars package
 
+```{r results='asis', echo=FALSE, include=FALSE,}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
+library(Fars)
+```
+
 ### ***fars_read()***
 
 Read accidents statistics by the given file name
@@ -38,8 +43,10 @@ Open file with accidents statistics by the given file name and read it into dply
 dplyr::tbl_df data frame with accident`s data
 
 **examples**
-```{r eval=FALSE}
-  data <- fars_read("accident_2016.csv.bz2")
+```{r}
+  name <- system.file("extdata", sprintf("accident_%d.csv.bz2", 2014), package = "Fars")
+  data <- fars_read(name)
+  data[1:3, 1:10]
 ```
 
 ### ***make_filename()***
@@ -56,7 +63,7 @@ filename - full file name as a character string
 
 **examples**
 ```{r}
-name <- Fars::make_filename(2014)
+make_filename(2014)
 ```
 
 ### ***fars_read_years()***
@@ -72,8 +79,9 @@ Read accident`s data by given years and return data frame with short info for ea
 Data frame of class dplyr::tbl_df with two columns (month ans year) per each accident. If data for any of given years do not exist function stops working and return an error message.
 
 **examples**
-```{r eval=FALSE}
- fars_read_years(c(2013, 2014, 2015))
+```{r}
+ data <- fars_read_years(c(2013, 2014, 2015))
+ data[[1]]
 ```
 
 
@@ -90,7 +98,7 @@ Function takes given vector of years and summarize statistical data about accide
 Data frame with summary about accidents in the given years: quantity of accidents per month for each year. If data for any of given years do not exist function stops working and return an error message.
 
 **examples**
-```{r eval=FALSE}
+```{r}
   fars_summarize_years(c(2013, 2014, 2015))
 ```
 
@@ -110,6 +118,6 @@ Function fars_map_state() draw a map of state with accidents on it by the given 
 Graphical map.
 
 **examples**
-```{r eval=FALSE}
+```{r}
 fars_map_state(state.num = 1, year = 2014)
 ```

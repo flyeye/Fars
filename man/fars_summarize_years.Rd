@@ -17,8 +17,6 @@ function stops working and return an error message.
 Function takes given vector of years and summarize statistical data about accidents
 }
 \examples{
-\dontrun{
 fars_summarize_years(c(2013, 2014, 2015))
-}
 
 }
